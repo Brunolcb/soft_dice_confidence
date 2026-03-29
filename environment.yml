@@ -1,0 +1,23 @@
+name: uncertainty
+channels:
+  - defaults
+dependencies:
+  - python=3.9
+  - torchvision
+  - pytorch=1
+  - pillow
+  - matplotlib=3.6
+  - scikit-learn
+  - ipykernel 
+  - tqdm
+  - pip:
+    - ipywidgets
+    - albumentations
+    - mayavi
+    - dask
+    - wandb
+    - SciencePlots
+    - fitter
+    - scikit-image
+    - SimpleITK
+    - tikzplotlib
