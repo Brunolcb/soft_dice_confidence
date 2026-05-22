@@ -1,1 +1,54 @@
-/medical-imaging/data/*
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Environments and IDE
+.venv/
+.vscode/
+*.egg-info/
+
+# Images (all locations)
+*.png
+*.PNG
+*.jpg
+*.jpeg
+*.gif
+
+# PDFs
+*.pdf
+
+# Keep final journal figures
+!medical-imaging/Journal_Graphs/
+!medical-imaging/Journal_Graphs/**
+
+# Model weights and checkpoints
+*.h5
+*.pth
+*.pb
+
+# Compressed and archive files
+*.zip
+*.gz
+*.npz
+
+# Binary data files
+*.pkl
+*.ml8
+
+# Datasets
+tasks_models/busi/datasets/
+tasks_models/isic/datasets/
+tasks_models/optic_cup/datasets/
+tasks_models/polyp/datasets/
+tasks_models/mswml/shifts2_data/
+
+# Model outputs and predictions
+tasks_models/mswml/predictions/
+tasks_models/optic_cup/segtran/prediction/
+tasks_models/optic_cup/segtran/model/
+tasks_models/polyp/inference_output/
+tasks_models/polyp/Polyp-PVT-main/inference_output/
+
+# Medical imaging data
+medical-imaging/data/

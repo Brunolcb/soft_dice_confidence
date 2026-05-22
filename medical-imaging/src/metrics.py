@@ -652,7 +652,7 @@ def soft_dice_norm_metric(pred, target, r=0.0783):
 
         return dsc_norm
 
-#função para realizar a curva de retenção
+# function to compute the retention curve
 def compute_retention_curve(confidence: np.ndarray, dices: np.ndarray):
     ordering = confidence.argsort()
 

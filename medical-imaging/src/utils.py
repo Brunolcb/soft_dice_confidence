@@ -429,13 +429,25 @@ def plot_max_aurc_curves(confidences: dict, errors: np.array, ax):
 
     return ax
 
-def thresh_alpha(p_hat, threshold=0.5):
-    # Case 1: p_hat is a single numpy array
-    if isinstance(p_hat, np.ndarray):
+def thresh_alpha(p_hat, y_hat=None, threshold=0.5):
+    # Case 0: If y_hat is provided and is a numpy array, compute with y_hat only
+    if y_hat is not None and isinstance(y_hat, np.ndarray):
+        return np.mean()
+    
+    # Case 1: y_hat is a list of numpy arrays
+    elif y_hat is not None and isinstance(y_hat, list):
+        threshold_alpha = []
+        for y_hat_i in zip(y_hat):
+            arr = np.asarray(y_hat_i)
+            threshold_alpha.append(np.mean(arr))
+        return np.mean(threshold_alpha)
+    
+    # Case 2: p_hat is a single numpy array
+    elif y_hat is None and isinstance(p_hat, np.ndarray):
         return np.mean(p_hat > threshold)
     
-    # Case 2: p_hat is a list (possibly of arrays of different shapes)
-    elif isinstance(p_hat, list):
+    # Case 3: p_hat is a list (possibly of arrays of different shapes)
+    elif y_hat is None and isinstance(p_hat, list):
         threshold_alpha = []
         for p_hat_i in p_hat:
             arr = np.asarray(p_hat_i)
@@ -466,7 +478,7 @@ def linear_interpolation(x, x0, y0, x1, y1):
         y  : The interpolated value corresponding to x.
     """
     if x1 - x0 == 0:
-        raise ValueError("Os valores de x0 e x1 não podem ser iguais.")
+        raise ValueError("The values of x0 and x1 cannot be equal.")
 
     return y0 + ((x - x0) / (x1 - x0)) * (y1 - y0)
 
@@ -629,3 +641,16 @@ def feature_extractor_3D(msk,u_thresh=0.95):
 
     all_features = {**features_3D, **first_order, **gray_level_co, **gray_level_run, **gray_level_size, **gray_level_depedence}
     return all_features
+
+def get_tuning_size(n, num_points=16):
+    max_points = int(np.floor(n/2) - 1)
+    num_points = min(max_points, num_points)
+    k = num_points
+    while True:
+        tuning_prop = np.geomspace(2/n, 0.5, k)
+        tuning_size = np.unique(np.round(tuning_prop*n)).astype(int)
+        if len(tuning_size) >= num_points:
+            assert len(tuning_size) == num_points
+            break
+        k += 1
+    return tuning_size

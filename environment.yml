@@ -1,4 +1,4 @@
-name: uncertainty
+name: sdc_env
 channels:
   - defaults
 dependencies:
@@ -10,10 +10,12 @@ dependencies:
   - scikit-learn
   - ipykernel 
   - tqdm
+  - pandas
+  - numpy
+  - conda-forge::mayavi
   - pip:
     - ipywidgets
     - albumentations
-    - mayavi
     - dask
     - wandb
     - SciencePlots
@@ -21,3 +23,5 @@ dependencies:
     - scikit-image
     - SimpleITK
     - tikzplotlib
+    - pyradiomics
+    - antspyx

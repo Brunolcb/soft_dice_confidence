@@ -18,6 +18,18 @@ def get_expected(Px, Py, h, metric):
             expected += Px[x] * Py[x][y] * metric(y, y_hat)
     return expected
 
+def get_tuning_size(n, num_points=16):
+    max_points = int(np.floor(n/2) - 1)
+    num_points = min(max_points, num_points)
+    k = num_points
+    while True:
+        tuning_prop = np.geomspace(2/n, 0.5, k)
+        tuning_size = np.unique(np.round(tuning_prop*n))
+        if len(tuning_size) >= num_points:
+            assert len(tuning_size) == num_points
+            break
+        k += 1
+    return tuning_size
 # def rc_curve(confidence, h, Px, Py, loss):
 #     r = get_true_conditional_risk(loss, Py, h)
 
