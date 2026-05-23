@@ -19,8 +19,8 @@ __pycache__/
 *.pdf
 
 # Keep final journal figures
-!medical-imaging/Journal_Graphs/
-!medical-imaging/Journal_Graphs/**
+!medical-imaging/graphs/
+!medical-imaging/graphs/**
 
 # Model weights and checkpoints
 *.h5

@@ -173,36 +173,36 @@ def make_fig_aurc(y, y_hat,dir_path_save, name,dpi=300, threshold = 0.5, soft_th
     fig.savefig('../%s/%s.pdf'%(dir_path_save,name), dpi=dpi)
     fig.show()
 
-def make_row_aurc(y, y_hat, threshold = 0.5, soft_thres=0.5, n_dice_r=0.7, metric='dice'):
+def make_row_aurc(y, p_hat, threshold = 0.5, soft_thres=0.5, n_dice_r=0.7, metric='dice'):
 
     if metric == 'dice':
-        dice_scores = np.stack([dice_coef(y_hat[i], y[i],threshold=threshold) for i in range(len(y))])
+        dice_scores = np.stack([dice_coef(p_hat[i], y[i],threshold=threshold) for i in range(len(y))])
         dice_errors = 1 - dice_scores
     elif metric=='ndice':
-        dice_scores = np.stack([dice_norm_metric(y_hat[i], y[i],threshold=threshold,r=n_dice_r) for i in range(len(y))])
+        dice_scores = np.stack([dice_norm_metric(p_hat[i], y[i],threshold=threshold,r=n_dice_r) for i in range(len(y))])
         dice_errors = 1 - dice_scores
     elif metric =='hd95':
-        dice_errors = np.stack([hd95(y_hat[i], y[i]) for i in range(len(y))])
+        dice_errors = np.stack([hd95(p_hat[i], y[i]) for i in range(len(y))])
     elif metric == 'acc':
-        dice_scores = np.stack([accuracy(y_hat[i], y[i],threshold=threshold) for i in range(len(y))])
+        dice_scores = np.stack([accuracy(p_hat[i], y[i],threshold=threshold) for i in range(len(y))])
         dice_errors = 1 - dice_scores
     elif metric == 'bacc':
-        dice_scores = np.stack([balanced_accuracy(y_hat[i], y[i],threshold=threshold) for i in range(len(y))])
+        dice_scores = np.stack([balanced_accuracy(p_hat[i], y[i],threshold=threshold) for i in range(len(y))])
         dice_errors = 1 - dice_scores
     elif metric == 'auroc':
-        dice_scores = np.stack([auroc_func(y[i].flatten(),y_hat[i].flatten()) for i in range(len(y))])
+        dice_scores = np.stack([auroc_func(y[i].flatten(),p_hat[i].flatten()) for i in range(len(y))])
         dice_errors = 1 - dice_scores
     elif metric == 'aupr':
-        dice_scores = np.stack([average_precision_score(y[i].flatten(), y_hat[i].flatten()) for i in range(len(y))])
+        dice_scores = np.stack([average_precision_score(y[i].flatten(), p_hat[i].flatten()) for i in range(len(y))])
         dice_errors = 1 - dice_scores
     elif metric == 'mae':
-        dice_errors = np.stack([mae(y_hat[i], y[i],threshold=threshold) for i in range(len(y))])
+        dice_errors = np.stack([mae(p_hat[i], y[i],threshold=threshold) for i in range(len(y))])
     elif metric == 'sme':
-        dice_errors = np.stack([sme(y_hat[i], y[i],threshold=threshold) for i in range(len(y))])
+        dice_errors = np.stack([sme(p_hat[i], y[i],threshold=threshold) for i in range(len(y))])
     elif metric == 'mape':
-        dice_errors = np.stack([mape(y_hat[i], y[i], threshold=threshold) for i in range(len(y))])
+        dice_errors = np.stack([mape(p_hat[i], y[i], threshold=threshold) for i in range(len(y))])
         
-    threshold_alpha = thresh_alpha(y_hat,threshold = threshold)            
+    threshold_alpha = thresh_alpha(p_hat,threshold = threshold)            
     confidence_metrics = {
         'aMSP': MeanMaxConfidence(),
         'aNE': ExpectedEntropy(),
@@ -259,7 +259,7 @@ def make_row_aurc(y, y_hat, threshold = 0.5, soft_thres=0.5, n_dice_r=0.7, metri
     #    'DSC_Cov_based_confidence_2.0':DSC_Cov_based_confidence_diff_mag(eta,alpha=alpha3),
     #    'DSC_Cov_based_confidence_Multi':DSC_Cov_based_confidence_diff_mag(eta,alpha=alpha4),
     }
-    confidences = {name: [confidence_metric(y_hat_i) for y_hat_i in y_hat]
+    confidences = {name: [confidence_metric(p_hat_i) for p_hat_i in p_hat]
                    for name, confidence_metric in confidence_metrics.items()}
     
     #confidences['Avg_HDT_Lession_Load'] = (np.array(confidences['HDT_loss'])+np.array(confidences['Lesion Load']))/2
@@ -268,36 +268,36 @@ def make_row_aurc(y, y_hat, threshold = 0.5, soft_thres=0.5, n_dice_r=0.7, metri
     
     return aurcs
 
-def corruption_level(y_hat, y, error_base=0, threshold = 0.5, n_dice_r=0.7, metric='dice'):
+def corruption_level(p_hat, y, error_base=0, threshold = 0.5, n_dice_r=0.7, metric='dice'):
     if metric == 'dice':
-        dice_scores = np.stack([dice_coef(y_hat[i], y[i],threshold=threshold) for i in range(len(y))])
+        dice_scores = np.stack([dice_coef(p_hat[i], y[i],threshold=threshold) for i in range(len(y))])
         dice_errors = 1 - dice_scores
     elif metric=='ndice':
-        dice_scores = np.stack([dice_norm_metric(y_hat[i], y[i],threshold=threshold,r=n_dice_r) for i in range(len(y))])
+        dice_scores = np.stack([dice_norm_metric(p_hat[i], y[i],threshold=threshold,r=n_dice_r) for i in range(len(y))])
         dice_errors = 1 - dice_scores
     elif metric =='hd95':
-        dice_errors = np.stack([hd95(y_hat[i], y[i]) for i in range(len(y))])
+        dice_errors = np.stack([hd95(p_hat[i], y[i]) for i in range(len(y))])
     elif metric == 'acc':
-        dice_scores = np.stack([accuracy(y_hat[i], y[i],threshold=threshold) for i in range(len(y))])
+        dice_scores = np.stack([accuracy(p_hat[i], y[i],threshold=threshold) for i in range(len(y))])
         dice_errors = 1 - dice_scores
     elif metric == 'bacc':
-        dice_scores = np.stack([balanced_accuracy(y_hat[i], y[i],threshold=threshold) for i in range(len(y))])
+        dice_scores = np.stack([balanced_accuracy(p_hat[i], y[i],threshold=threshold) for i in range(len(y))])
         dice_errors = 1 - dice_scores
     elif metric == 'auroc':
-        dice_scores = np.stack([auroc_func(y[i].flatten(),y_hat[i].flatten()) for i in range(len(y))])
+        dice_scores = np.stack([auroc_func(y[i].flatten(),p_hat[i].flatten()) for i in range(len(y))])
         dice_errors = 1 - dice_scores
     elif metric == 'aupr':
-        dice_scores = np.stack([average_precision_score(y[i].flatten(), y_hat[i].flatten()) for i in range(len(y))])
+        dice_scores = np.stack([average_precision_score(y[i].flatten(), p_hat[i].flatten()) for i in range(len(y))])
         dice_errors = 1 - dice_scores
     elif metric == 'mae':
-        dice_errors = np.stack([mae(y_hat[i], y[i],threshold=threshold) for i in range(len(y))])
+        dice_errors = np.stack([mae(p_hat[i], y[i],threshold=threshold) for i in range(len(y))])
     elif metric == 'sme':
-        dice_errors = np.stack([sme(y_hat[i], y[i],threshold=threshold) for i in range(len(y))])
+        dice_errors = np.stack([sme(p_hat[i], y[i],threshold=threshold) for i in range(len(y))])
     elif metric == 'mape':
-        dice_errors = np.stack([mape(y_hat[i], y[i], threshold=threshold) for i in range(len(y))])   
+        dice_errors = np.stack([mape(p_hat[i], y[i], threshold=threshold) for i in range(len(y))])   
         
     corruption = {}
-    threshold_alpha = thresh_alpha(y_hat,threshold = threshold)            
+    threshold_alpha = thresh_alpha(p_hat,threshold = threshold)            
     confidence_metrics = {
         'aMSP': MeanMaxConfidence(),
         'aNE': ExpectedEntropy(),
@@ -321,7 +321,7 @@ def corruption_level(y_hat, y, error_base=0, threshold = 0.5, n_dice_r=0.7, metr
     #    'DSC_Cov_based_confidence_2.0':DSC_Cov_based_confidence_diff_mag(eta,alpha=alpha3),
     #    'DSC_Cov_based_confidence_Multi':DSC_Cov_based_confidence_diff_mag(eta,alpha=alpha4),
     }
-    confidences = {name: [confidence_metric(y_hat_i) for y_hat_i in y_hat]
+    confidences = {name: [confidence_metric(p_hat_i) for p_hat_i in p_hat]
                    for name, confidence_metric in confidence_metrics.items()}
     for name, confidence in confidences.items():
         coverage, risk, _ = rc_curve(confidence, dice_errors)

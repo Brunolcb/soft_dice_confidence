@@ -6,7 +6,7 @@ dependencies:
   - torchvision
   - pytorch=1
   - pillow
-  - matplotlib=3.6
+  - matplotlib=3.9
   - scikit-learn
   - ipykernel 
   - tqdm
@@ -25,3 +25,4 @@ dependencies:
     - tikzplotlib
     - pyradiomics
     - antspyx
+    - nibabel

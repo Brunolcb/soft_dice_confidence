@@ -607,7 +607,49 @@ def uncertainty_error_overlap(
     best_idx = int(np.argmin(mean_dice_k))
     return float(thresholds_u[best_idx])
 
+def feature_extractor_2D(msk,u_thresh=0.95):
+    # Convert images to numpy arrays
+    image_np = np.squeeze(msk)
+    mask_np = np.squeeze(msk>u_thresh).astype(np.uint8)
 
+    # Convert numpy arrays to SimpleITK images
+    image_sitk = sitk.GetImageFromArray(image_np)
+    mask_sitk = sitk.GetImageFromArray(mask_np)
+    
+    # Use PyRadiomics to extract features
+    try:
+        features_2D = radiomics.shape2D.RadiomicsShape2D(image_sitk, mask_sitk, binWidth=25)
+        features_2D = features_2D.execute()
+    except:
+        features_2D = {}
+    try:
+        first_order = radiomics.firstorder.RadiomicsFirstOrder(image_sitk, mask_sitk, binWidth=25)
+        first_order = first_order.execute()
+    except:
+        first_order = {}
+    try:
+        gray_level_co = radiomics.glcm.RadiomicsGLCM(image_sitk, mask_sitk, binWidth=25)
+        gray_level_co = gray_level_co.execute() 
+    except:
+        gray_level_co = {}
+    try:
+        gray_level_run = radiomics.glrlm.RadiomicsGLRLM(image_sitk, mask_sitk, binWidth=25)
+        gray_level_run = gray_level_run.execute()
+    except:
+        gray_level_run = {}
+    try:
+        gray_level_size = radiomics.glszm.RadiomicsGLSZM(image_sitk, mask_sitk, binWidth=25)
+        gray_level_size = gray_level_size.execute()
+    except:
+        gray_level_size = {}
+    try:
+        gray_level_depedence = radiomics.gldm.RadiomicsGLDM(image_sitk, mask_sitk, binWidth=25)
+        gray_level_depedence = gray_level_depedence.execute()
+    except:
+        gray_level_depedence = {}
+
+    all_features = {**features_2D, **first_order, **gray_level_co, **gray_level_run, **gray_level_size, **gray_level_depedence}
+    return all_features
 
 def feature_extractor_3D(msk,u_thresh=0.95):
     
