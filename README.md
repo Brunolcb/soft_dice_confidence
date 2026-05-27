@@ -2,7 +2,7 @@
 
 This repository contains the code and experiments for the paper:
 
-> **Selective Segmentation with Soft Dice Confidence**
+> [Soft Dice Confidence: A Near-Optimal Confidence Estimator for Selective Prediction in Semantic Segmentation](https://arxiv.org/abs/2402.10665)
 
 Soft Dice Confidence (SDC) is a confidence estimator designed for selective prediction at the image level in semantic segmentation tasks. It ranks segmentation predictions by their expected Dice performance, enabling a model to abstain from low-confidence predictions and improve reliability.
 
