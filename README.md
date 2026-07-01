@@ -72,14 +72,14 @@ The medical imaging experiments follow a fixed pipeline. Run the steps below **i
 
 Each sub-folder trains the task model, runs inference, and saves probability maps (`.npz` files with keys `p_hat` and `y`) into `medical-imaging/data/`. Run the preprocessing and inference notebooks for every dataset you want to reproduce:
 
-| Dataset | Task | Model | Notebooks |
-|---|---|---|---|
-| **BUSI** | Breast ultrasound lesion segmentation | UNeXt | `00_setup_env_UNeXt.ipynb` → `01_preprocessing_BUSI.ipynb` → `02_train_inference_UNeXt_BUSI.ipynb` |
-| **ISIC 2018** | Skin lesion segmentation | UNeXt | `01_preprocessing_ISIC.ipynb` → `02_train_inference_UNeXt_ISIC.ipynb` |
-| **Kvasir / CVC (Polyp)** | Polyp segmentation | Polyp-PVT | `00_register_polyp_project_kernel.ipynb` → `01_inference_PolypPVT.ipynb` |
-| **REFUGE / ORIGA / G1020 (Optic Cup)** | Optic cup segmentation | SegTran | `00_setup_env_SegTran.ipynb` → `01_preprocessing_OpticCup_REFUGE.ipynb` → `02_train_inference_SegTran_OpticCup.ipynb` |
-| **BraTS** | Brain tumour segmentation | MSWML ensemble | `brats_post_processing.ipynb` |
-| **MSWML (MS lesion)** | Multiple sclerosis white matter lesion segmentation | MSWML (Shifts challenge) | `installation_repo.ipynb` → `inference.ipynb` → `create_pickle_files.ipynb` |
+| Dataset | Task | Model | Notebooks | Notes |
+|---|---|---|---|---|
+| **BUSI** | Breast ultrasound lesion segmentation | UNeXt | `00_setup_env_UNeXt.ipynb` → `01_preprocessing_BUSI.ipynb` → `02_train_inference_UNeXt_BUSI.ipynb` | [README](tasks_models/busi/README.md) |
+| **ISIC 2018** | Skin lesion segmentation | UNeXt | `01_preprocessing_ISIC.ipynb` → `02_train_inference_UNeXt_ISIC.ipynb` | [README](tasks_models/isic/README.md) |
+| **Kvasir / CVC (Polyp)/ ETIS dataset** | Polyp segmentation | Polyp-PVT | `00_register_polyp_project_kernel.ipynb` → `01_inference_PolypPVT.ipynb` | [README](tasks_models/polyp/README.md) |
+| **REFUGE / ORIGA / G1020 (Optic Cup)** | Optic cup segmentation | SegTran | `00_setup_env_SegTran.ipynb` → `01_preprocessing_OpticCup_REFUGE.ipynb` → `02_train_inference_SegTran_OpticCup.ipynb` | [README](tasks_models/optic_cup/README.md) |
+| **BraTS** | Brain tumour segmentation | nnU-net | `brats_post_processing.ipynb` | [README](tasks_models/brats/README.md) |
+| **MSWML (MS lesion)** | Multiple sclerosis white matter lesion segmentation | MSWML (Shifts challenge) | `installation_repo.ipynb` → `inference.ipynb` → `create_pickle_files.ipynb` | [README](tasks_models/mswml/README.md) |
 
 ### Step 2 — Risk–Coverage Curves
 
@@ -160,6 +160,14 @@ Computes and visualises the theoretical performance bounds for the selective seg
 | **SegTran** | [jonfan/segtran](https://github.com/askerlee/segtran) · [Paper](https://doi.org/10.48550/arXiv.2102.07016) |
 | **MSWML** | [Shifts Challenge](https://github.com/Shifts-Project/shifts) · [Paper](https://doi.org/10.48550/arXiv.2206.08086) |
 | **MNet DeepCDR** (optic disc/cup pre-processing) | [HzFu/MNet_DeepCDR](https://github.com/HzFu/MNet_DeepCDR) · [Paper](https://doi.org/10.1109/TMI.2018.2885446) |
+
+---
+
+## Note on Differences Between Repository Results and Published Article
+
+During the course of this research, part of the original work was lost due to a computer hardware failure. As a result, the original preprocessing outputs and dataset splits could not be fully recovered. Consequently, some of the graphs presented in this repository differ from those reported in the published article. Nevertheless, these differences do not affect the main findings or conclusions of the study.
+
+In addition, several updates were introduced in the process of reconstructing the experimental pipeline, including the use of newer model versions and modifications to the data acquisition and preprocessing procedures. Further details regarding these task-specific modifications are provided in the individual `README.md` files located within the `tasks_models/` subdirectories.
 
 ---
 
