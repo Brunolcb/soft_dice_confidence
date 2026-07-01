@@ -159,6 +159,7 @@ Computes and visualises the theoretical performance bounds for the selective seg
 | **Polyp-PVT** | [DengPingFan/Polyp-PVT](https://github.com/DengPingFan/Polyp-PVT) · [Paper](https://doi.org/10.48550/arXiv.2108.06932) |
 | **SegTran** | [jonfan/segtran](https://github.com/askerlee/segtran) · [Paper](https://doi.org/10.48550/arXiv.2102.07016) |
 | **MSWML** | [Shifts Challenge](https://github.com/Shifts-Project/shifts) · [Paper](https://doi.org/10.48550/arXiv.2206.08086) |
+| **nnU-Net** | [MIC-DKFZ/nnUNet](https://github.com/MIC-DKFZ/nnUNet) · [Paper](https://link.springer.com/chapter/10.1007/978-3-030-72087-2_11) |
 | **MNet DeepCDR** (optic disc/cup pre-processing) | [HzFu/MNet_DeepCDR](https://github.com/HzFu/MNet_DeepCDR) · [Paper](https://doi.org/10.1109/TMI.2018.2885446) |
 
 ---
