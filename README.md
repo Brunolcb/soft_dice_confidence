@@ -177,13 +177,14 @@ In addition, several updates were introduced in the process of reconstructing th
 If you use this code or the SDC estimator in your work, please cite:
 
 ```bibtex
-@misc{borges2026softdiceconfidencenearoptimal,
-      title={Soft Dice Confidence: A Near-Optimal Confidence Estimator for Selective Prediction in Semantic Segmentation}, 
-      author={Bruno Laboissiere Camargos Borges and Bruno Machado Pacheco and Danilo Silva},
-      year={2026},
-      eprint={2402.10665},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG},
-      url={https://arxiv.org/abs/2402.10665}, 
+@article{borges2026softdiceconfidencenearoptimal,
+  author  = {Borges, Bruno L. C. and Pacheco, Bruno M. and Silva, Danilo},
+  title   = {Soft Dice Confidence: A Near-Optimal Confidence Estimator for Selective Prediction in Semantic Segmentation},
+  journal = {Machine Learning},
+  year    = {2026},
+  volume  = {115},
+  pages   = {176},
+  doi     = {10.1007/s10994-026-07096-w},
+  url     = {https://doi.org/10.1007/s10994-026-07096-w}
 }
 ```
