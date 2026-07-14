@@ -2,8 +2,8 @@
 
 This repository contains the code and experiments for the paper:
 
-**Soft Dice Confidence: A Near-Optimal Confidence Estimator for Selective Prediction in Semantic Segmentation** 
-*Bruno L. C. Borges, Bruno M. Pacheco, Danilo Silva* 
+**Soft Dice Confidence: A Near-Optimal Confidence Estimator for Selective Prediction in Semantic Segmentation**  
+*Bruno L. C. Borges, Bruno M. Pacheco, Danilo Silva*  
 Published in Machine Learning, 2026
 
 📄 [Official Journal Version](https://doi.org/10.1007/s10994-026-07096-w) | 🔗 [arXiv Preprint](https://arxiv.org/abs/2402.10665)
